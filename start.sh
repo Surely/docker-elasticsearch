@@ -134,12 +134,25 @@ else
 
 #added by yuhao 2016-11-28 use logstash for jdbc only
 #=================================================
+if [ -z "$MYSQL_HOST" ]; then
+  MYSQL_HOST=db
+fi
+
+if [ -z "$MYSQL_PORT" ]; then
+  MYSQL_PORT=3306
+fi
+
+if [ -z "$SCHEDULER_INTERVAL_MINUTES" ]; then
+  SCHEDULER_INTERVAL_MINUTES=5
+fi
 
 echo "init elastic search index."
 sed -i \
     -e 's/<MYSQL_DATABASE>/'${MYSQL_DATABASE}'/g' \
     -e 's/<MYSQL_USER>/'${MYSQL_USER}'/g' \
     -e 's/<MYSQL_PASSWORD>/'${MYSQL_PASSWORD}'/g' \
+    -e 's/<MYSQL_HOST>/'${MYSQL_HOST}'/g'\
+    -e 's/<MYSQL_PORT>/'${MYSQL_PORT}'/g'\
     /usr/local/bin/init_es_index.sh
 sh /usr/local/bin/init_es_index.sh
 echo "init elastic search index."
@@ -153,6 +166,9 @@ sed -i \
     -e 's/<MYSQL_DATABASE>/'${MYSQL_DATABASE}'/g' \
     -e 's/<MYSQL_USER>/'${MYSQL_USER}'/g' \
     -e 's/<MYSQL_PASSWORD>/'${MYSQL_PASSWORD}'/g' \
+    -e 's/<MYSQL_HOST>/'${MYSQL_HOST}'/g'\
+    -e 's/<MYSQL_PORT>/'${MYSQL_PORT}'/g'\
+    -e 's/<SCHEDULER_INTERVAL_MINUTES>/'${SCHEDULER_INTERVAL_MINUTES}'/g'\
     /etc/logstash/conf.d/mysql.conf
 
 #=================================================
@@ -186,3 +202,4 @@ fi
 
 tail -f $OUTPUT_LOGFILES &
 wait
+

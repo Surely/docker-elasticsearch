@@ -1,4 +1,8 @@
-network.host: 0.0.0.0
+http.host: 0.0.0.0
+#port 80 only can be added when running elasticsearch as root 
+#default we use a iptables redirect to 80 through following commands:
+#iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 9200
+#http.port: 80
 
 # this value is required because we set "network.host"
 # be sure to modify it appropriately for a production cluster deployment

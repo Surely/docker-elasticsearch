@@ -1,11 +1,16 @@
 version: '2'
 services:
   elasticsearch:
-    image: birdservice/docker-elasticsearch
+#    image: surely/elasticsearch
+    build:
+      context: .
     environment:
       - MYSQL_USER=root
       - MYSQL_PASSWORD=aeiEJA93Kadki93f
       - MYSQL_DATABASE=birdego
+      - MYSQL_HOST=192.168.43.196
+      - MYSQL_PORT=3307
+      - SCHEDULER_INTERVAL_MINUTES=5
     ports:
       - '9200:9200'
 

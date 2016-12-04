@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 
-docker build -t birdservice/docker-elasticsearch -f Dockerfile ./
+docker build -t surely/elasticsearch -f Dockerfile ./

@@ -5,7 +5,7 @@ ENV ELASTICSEARCH_START=1
 ENV LOGSTASH_START=1
 
 ENV KIBANA_START=0
-ENV ES_CONNECT_RETRY=120
+ENV ES_CONNECT_RETRY=180
 
 ENV ES_HEAP_SIZE=16m
 ENV LS_HEAP_SIZE=16m
@@ -13,11 +13,11 @@ ENV LS_HEAP_SIZE=16m
 
 COPY ./config /etc/elasticsearch
 
-#CURL POST  init Elastic Search  basic index structure
+#run curl post  init Elastic Search  basic index structure
 ADD ./init_es_index.sh /usr/local/bin/init_es_index.sh
 RUN chmod +x /usr/local/bin/init_es_index.sh
 
-#ADD logstash file for jdbc
+#add logstash file for jdbc
 ADD ./logstash.conf /etc/logstash/conf.d/mysql.conf
 
 RUN mkdir /opt/logstash/driver
